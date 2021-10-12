@@ -18,15 +18,10 @@ namespace Primtal
             bool run = true;
             do
             {
-                Console.WriteLine("To end prog put in 0");
-                Console.WriteLine("Hello, put in number to check if it's a Prime.");
+                Console.WriteLine("Write 0 to end program.");
+                Console.WriteLine("Put in number to check if it's a Prime.");
                 Int32.TryParse(Console.ReadLine(), out int inputNumber);
-                bool nullcheck = string.IsNullOrEmpty(inputNumber.ToString());
-                if (inputNumber == 0)
-                {
-                    run = false;
-                }
-                if (nullcheck || inputNumber > 2)
+                if (inputNumber > 1)
                 {
                     CheckPrimeNumber(inputNumber);
                 }
@@ -40,10 +35,23 @@ namespace Primtal
 
         public void CheckPrimeNumber(int inputNumber)
         {
-            bool isPrime = false;
-
-
-
+            bool IsPrime = true;
+            for (int i = 2; i <= inputNumber / 2; i++)
+            {
+                if (inputNumber % i == 0)
+                {
+                    IsPrime = false;
+                    break;
+                }
+            }
+            if (IsPrime)
+            {
+                Console.Write("Number is Prime.");
+            }
+            else
+            {
+                Console.Write("Number is not Prime.");
+            }
         }
     }
 }
