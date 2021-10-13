@@ -16,9 +16,56 @@ namespace Primtal
         public void Menu()
         {
             bool run = true;
-            do
+            while (run)
             {
-                Console.WriteLine("Write 0 to end program.");
+                Console.WriteLine("Main Menu");
+                Console.WriteLine("1. Enter number to check if Prime.");
+                Console.WriteLine("2. Print the whole datastructure.");
+                Console.WriteLine("3. Add next prime from highest in datastructure.");
+                Console.WriteLine("0. End program.");
+                Int32.TryParse(Console.ReadLine(), out int input);
+                switch (input)
+                {
+                    case 1:
+                        {
+                            CheckPrimeNumberMenu();
+                            break;
+                        }
+                    case 2:
+                        {
+                            PrintAll();
+                            break;
+                        }
+                    case 3:
+                        {
+                            AddNextPrime();
+                            break;
+                        }
+                    case 0:
+                        {
+                            run = false;
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void AddNextPrime()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PrintAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckPrimeNumberMenu()
+        {
+            bool run = true;
+            
+            while (run)
+                {
                 Console.WriteLine("Put in number to check if it's a Prime.");
                 Int32.TryParse(Console.ReadLine(), out int inputNumber);
                 if (inputNumber > 1)
@@ -30,7 +77,7 @@ namespace Primtal
                     Console.WriteLine("Wrong input, try again!");
                 }
 
-            } while (run);
+            }
         }
 
         public void CheckPrimeNumber(int inputNumber)
