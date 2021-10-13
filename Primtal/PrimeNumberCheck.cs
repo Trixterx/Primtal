@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace Primtal
 {
@@ -9,49 +10,55 @@ namespace Primtal
     {
         public static List<int> primeList = new List<int>();
 
-        public void Run()
-        {
-            Menu();
-        }
-
-        public void Menu()
+        public void MainMenu()
         {
             bool run = true;
             while (run)
             {
+                Console.Clear();
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("1. Enter number to check if prime.");
                 Console.WriteLine("2. Print list of prime numbers.");
                 Console.WriteLine("3. Add next prime from highest in the list");
                 Console.WriteLine("0. End program.");
-                Int32.TryParse(Console.ReadLine(), out int input);
-                switch (input)
+                if (Int32.TryParse(Console.ReadLine(), out int input))
                 {
-                    case 1:
-                        {
-                            CheckPrimeNumberMenu();
-                            break;
-                        }
-                    case 2:
-                        {
-                            PrintAll();
-                            break;
-                        }
-                    case 3:
-                        {
-                            AddNextPrime();
-                            break;
-                        }
-                    case 0:
-                        {
-                            run = false;
-                            break;
-                        }
-                    default:
-                        {
-                            Console.WriteLine("Wrong input.");
-                            break;
-                        }
+                    switch (input)
+                    {
+                        case 1:
+                            {
+                                CheckPrimeNumberMenu();
+                                Thread.Sleep(2000);
+                                break;
+                            }
+                        case 2:
+                            {
+                                PrintAll();
+                                Thread.Sleep(2000);
+                                break;
+                            }
+                        case 3:
+                            {
+                                AddNextPrime();
+                                Thread.Sleep(2000);
+                                break;
+                            }
+                        case 0:
+                            {
+                                run = false;
+                                break;
+                            }
+                        default:
+                            {
+                                Console.WriteLine("Wrong input.");
+                                Thread.Sleep(2000);
+                                break;
+                            }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input");
                 }
             }
         }
@@ -63,7 +70,10 @@ namespace Primtal
 
         private void PrintAll()
         {
-            throw new NotImplementedException();
+            foreach(var prime in primeList)
+            {
+                Console.WriteLine(prime);
+            }
         }
 
         private void CheckPrimeNumberMenu()
@@ -72,33 +82,46 @@ namespace Primtal
             
             while (run)
                 {
+                Console.Clear();
                 Console.WriteLine("Enter number to check if it's a Prime.");
-                Int32.TryParse(Console.ReadLine(), out int input);
-                if (input > 1)
+                if (Int32.TryParse(Console.ReadLine(), out int input))
                 {
-                    CheckPrimeNumber(input);
-                    run = false;
+                    if (input <= 1)
+                    {
+                        Console.WriteLine("To low! Only numbers over 2 is possible prime numbers. Try again!");
+                        Thread.Sleep(2000);
+                    }
+                    else if (input > 1)
+                    {
+                        CheckPrimeNumber(input);
+                        Thread.Sleep(2000);
+                        run = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong input, try again!");
+                        Thread.Sleep(2000);
+                    }
                 }
                 else
                 {
                     Console.WriteLine("Wrong input, try again!");
                 }
-
             }
         }
 
         public void CheckPrimeNumber(int input)
         {
-            bool isPrime = true;
+            bool prime = true;
             for (int i = 2; i <= input / 2; i++)
             {
                 if (input % i == 0)
                 {
-                    isPrime = false;
+                    prime = false;
                     break;
                 }
             }
-            if (isPrime)
+            if (prime)
             {
                 Console.WriteLine("Number is Prime and was added to list.");
                 primeList.Add(input);

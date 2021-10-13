@@ -7,7 +7,7 @@ namespace Primtal
         static void Main(string[] args)
         {
             var PrimeNumberCheck = new PrimeNumberCheck();
-            PrimeNumberCheck.Run();
+            PrimeNumberCheck.MainMenu();
         }
     }
 }
