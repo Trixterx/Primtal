@@ -19,7 +19,6 @@ namespace Primtal
         /// </summary>
         public void MainMenu()
         {
-                primeList.Add(7);
             bool run = true;
             while (run)
             {
@@ -79,7 +78,15 @@ namespace Primtal
             {
                 primeList.Sort();
                 var lastPrime = primeList.Last<int>();
-                primeList.Add(CheckLastPrime(lastPrime));
+                if (lastPrime >= 2147483647)
+                {
+                    Console.WriteLine("The last number in the list is to big and cannot be calculated. This program is built using 32bit integers and can only handle 2147483647 numbers on the positive scale.");
+                    Thread.Sleep(4000);
+                }
+                else
+                {
+                    primeList.Add(CheckLastPrime(lastPrime));
+                }
             }
             else
             {
@@ -113,7 +120,6 @@ namespace Primtal
         private void CheckPrimeNumberMenu()
         {
             bool run = true;
-            
             while (run)
                 {
                 Console.Clear();
@@ -122,12 +128,11 @@ namespace Primtal
                 {
                     if (input <= 1)
                     {
-                        Console.WriteLine("To low! Only numbers over 2 is possible prime numbers. Try again!");
+                        Console.WriteLine("To low number. Only positive numbers over 2 is acceptable. Try again!");
                         Thread.Sleep(2000);
                     }
                     else if (input > 1)
                     {
-
                         if (CheckPrimeNumber(input))
                         {
                             Console.WriteLine("Number is Prime and was added to list.");
