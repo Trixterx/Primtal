@@ -19,6 +19,7 @@ namespace Primtal
         /// </summary>
         public void MainMenu()
         {
+                primeList.Add(7);
             bool run = true;
             while (run)
             {
@@ -52,12 +53,13 @@ namespace Primtal
                             }
                         case 0:
                             {
+                                Console.WriteLine("Bye bye..");
                                 run = false;
                                 break;
                             }
                         default:
                             {
-                                Console.WriteLine("Wrong input.");
+                                Console.WriteLine("Wrong input, try again!");
                                 Thread.Sleep(2000);
                                 break;
                             }
@@ -65,17 +67,25 @@ namespace Primtal
                 }
                 else
                 {
-                    Console.WriteLine("Wrong input");
+                    Console.WriteLine("Wrong input, try again!");
+                    Thread.Sleep(2000);
                 }
             }
         }
 
         private void AddNextPrime()
         {
-            primeList.Sort();
-            var lastPrime = primeList.Last<int>();
-            Console.WriteLine(lastPrime);
-            Thread.Sleep(2000);
+            if (primeList.Count >= 1)
+            {
+                primeList.Sort();
+                var lastPrime = primeList.Last<int>();
+                primeList.Add(CheckLastPrime(lastPrime));
+            }
+            else
+            {
+                Console.WriteLine("List is empty.");
+                Thread.Sleep(2000);
+            }
         }
 
         /// <summary>
@@ -83,9 +93,17 @@ namespace Primtal
         /// </summary>
         private void PrintAll()
         {
-            foreach(var prime in primeList)
+            if (primeList.Count >= 1)
             {
-                Console.WriteLine(prime);
+                foreach (var prime in primeList)
+                {
+                    Console.WriteLine(prime);
+                }
+            }
+            else
+            {
+                Console.WriteLine("List is empty.");
+                Thread.Sleep(2000);
             }
         }
 
@@ -109,7 +127,16 @@ namespace Primtal
                     }
                     else if (input > 1)
                     {
-                        CheckPrimeNumber(input);
+
+                        if (CheckPrimeNumber(input))
+                        {
+                            Console.WriteLine("Number is Prime and was added to list.");
+                            primeList.Add(input);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Number is not Prime.");
+                        }
                         Thread.Sleep(2000);
                         run = false;
                     }
@@ -122,34 +149,42 @@ namespace Primtal
                 else
                 {
                     Console.WriteLine("Wrong input, try again!");
+                    Thread.Sleep(2000);
                 }
             }
         }
 
         /// <summary>
-        /// Method that checks if the input number is a prime number or not.
+        /// Method that checks if the input number is a prime number or not and returns a bool.
         /// </summary>
         /// <param name="input"></param>
-        public void CheckPrimeNumber(int input)
+        public bool CheckPrimeNumber(int input)
         {
-            bool prime = true;
             for (int i = 2; i <= input / 2; i++)
             {
                 if (input % i == 0)
                 {
-                    prime = false;
-                    break;
+                    return false;
                 }
             }
-            if (prime)
+            return true;
+        }
+
+        /// <summary>
+        /// Method uses the last prime number to get the next prime number and returns it.
+        /// </summary>
+        /// <param name="lastPrime"></param>
+        /// <returns></returns>
+        public int CheckLastPrime(int lastPrime)
+        {
+            for (int i = lastPrime + 1; i < 2 * lastPrime; i++)
             {
-                Console.WriteLine("Number is Prime and was added to list.");
-                primeList.Add(input);
+                if (CheckPrimeNumber(i))
+                {
+                    return i;
+                }
             }
-            else
-            {
-                Console.WriteLine("Number is not Prime.");
-            }
+            return 0;
         }
     }
 }
