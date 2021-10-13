@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
@@ -8,8 +9,14 @@ namespace Primtal
 {
     class PrimeNumberCheck
     {
-        public static List<int> primeList = new List<int>();
+        /// <summary>
+        /// List to add prime numbers to.
+        /// </summary>
+        private static List<int> primeList = new List<int>();
 
+        /// <summary>
+        /// Main menu
+        /// </summary>
         public void MainMenu()
         {
             bool run = true;
@@ -65,9 +72,15 @@ namespace Primtal
 
         private void AddNextPrime()
         {
-            throw new NotImplementedException();
+            primeList.Sort();
+            var lastPrime = primeList.Last<int>();
+            Console.WriteLine(lastPrime);
+            Thread.Sleep(2000);
         }
 
+        /// <summary>
+        /// Method to print all the prime numbers that have been added to the list.
+        /// </summary>
         private void PrintAll()
         {
             foreach(var prime in primeList)
@@ -76,6 +89,9 @@ namespace Primtal
             }
         }
 
+        /// <summary>
+        /// Menu for checking if it's a prime number.
+        /// </summary>
         private void CheckPrimeNumberMenu()
         {
             bool run = true;
@@ -110,6 +126,10 @@ namespace Primtal
             }
         }
 
+        /// <summary>
+        /// Method that checks if the input number is a prime number or not.
+        /// </summary>
+        /// <param name="input"></param>
         public void CheckPrimeNumber(int input)
         {
             bool prime = true;
