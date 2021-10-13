@@ -45,7 +45,7 @@ namespace Primtal
                         case 3:
                             {
                                 AddNextPrime();
-                                Thread.Sleep(2000);
+                                Thread.Sleep(1000);
                                 break;
                             }
                         case 0:
