@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Primtal
+﻿namespace Primtal
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var PrimeNumberCheck = new PrimeNumberCheck();
             PrimeNumberCheck.MainMenu();

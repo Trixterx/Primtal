@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 
 namespace Primtal
 {
-    class PrimeNumberCheck
+    internal class PrimeNumberCheck
     {
         /// <summary>
         /// List to add prime numbers to.
@@ -72,6 +70,9 @@ namespace Primtal
             }
         }
 
+        /// <summary>
+        /// Method for adding next prime number from the list.
+        /// </summary>
         private void AddNextPrime()
         {
             if (primeList.Count >= 1)
@@ -121,7 +122,7 @@ namespace Primtal
         {
             bool run = true;
             while (run)
-                {
+            {
                 Console.Clear();
                 Console.WriteLine("Enter number to check if it's a Prime.");
                 if (Int32.TryParse(Console.ReadLine(), out int input))
