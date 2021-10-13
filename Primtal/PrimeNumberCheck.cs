@@ -7,6 +7,7 @@ namespace Primtal
 {
     class PrimeNumberCheck
     {
+        public static List<int> primeList = new List<int>();
 
         public void Run()
         {
@@ -19,9 +20,9 @@ namespace Primtal
             while (run)
             {
                 Console.WriteLine("Main Menu");
-                Console.WriteLine("1. Enter number to check if Prime.");
-                Console.WriteLine("2. Print the whole datastructure.");
-                Console.WriteLine("3. Add next prime from highest in datastructure.");
+                Console.WriteLine("1. Enter number to check if prime.");
+                Console.WriteLine("2. Print list of prime numbers.");
+                Console.WriteLine("3. Add next prime from highest in the list");
                 Console.WriteLine("0. End program.");
                 Int32.TryParse(Console.ReadLine(), out int input);
                 switch (input)
@@ -46,6 +47,11 @@ namespace Primtal
                             run = false;
                             break;
                         }
+                    default:
+                        {
+                            Console.WriteLine("Wrong input.");
+                            break;
+                        }
                 }
             }
         }
@@ -66,11 +72,12 @@ namespace Primtal
             
             while (run)
                 {
-                Console.WriteLine("Put in number to check if it's a Prime.");
-                Int32.TryParse(Console.ReadLine(), out int inputNumber);
-                if (inputNumber > 1)
+                Console.WriteLine("Enter number to check if it's a Prime.");
+                Int32.TryParse(Console.ReadLine(), out int input);
+                if (input > 1)
                 {
-                    CheckPrimeNumber(inputNumber);
+                    CheckPrimeNumber(input);
+                    run = false;
                 }
                 else
                 {
@@ -80,24 +87,25 @@ namespace Primtal
             }
         }
 
-        public void CheckPrimeNumber(int inputNumber)
+        public void CheckPrimeNumber(int input)
         {
-            bool IsPrime = true;
-            for (int i = 2; i <= inputNumber / 2; i++)
+            bool isPrime = true;
+            for (int i = 2; i <= input / 2; i++)
             {
-                if (inputNumber % i == 0)
+                if (input % i == 0)
                 {
-                    IsPrime = false;
+                    isPrime = false;
                     break;
                 }
             }
-            if (IsPrime)
+            if (isPrime)
             {
-                Console.Write("Number is Prime.");
+                Console.WriteLine("Number is Prime and was added to list.");
+                primeList.Add(input);
             }
             else
             {
-                Console.Write("Number is not Prime.");
+                Console.WriteLine("Number is not Prime.");
             }
         }
     }
